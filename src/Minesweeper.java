@@ -10,8 +10,16 @@ public class Minesweeper {
 
     private void start(){
         this.printInstructions();
+        this.printDifficultyInfo();
         this.selectDifficulty();
         this.playGame();
+    }
+    private void printDifficultyInfo(){
+        System.out.println("Now, select a difficulty you want to play on.");
+        System.out.println("There are 3 difficulties: ");
+        System.out.println("1) Easy - 8x8 board, 10 mines.");
+        System.out.println("2) Intermediate -  16x16 board, 40 mines.");
+        System.out.println("3) Extreme - 16x30 board, 99 mines.");
     }
     private void printInstructions(){
         System.out.println("Welcome to minesweeper!");
@@ -24,13 +32,16 @@ public class Minesweeper {
     }
     private void selectDifficulty(){
         Scanner s=new Scanner(System.in);
-        System.out.println("Now, select a difficulty you want to play on.");
-        System.out.println("There are 3 difficulties: ");
-        System.out.println("1) Easy - 8x8 board, 10 mines.");
-        System.out.println("2) Intermediate -  16x16 board, 40 mines.");
-        System.out.println("3) Extreme - 16x30 board, 99 mines.");
         System.out.print("Difficulty: ");
-        int diff=s.nextInt();
+        String line = s.nextLine();
+        int diff;
+        try {
+            diff = Integer.parseInt(line);
+        }catch (Exception e){
+            System.out.println("Provide proper input, an integer from 1 to 3");
+            selectDifficulty();
+            return;
+        }
         while(diff<1 || diff>3){
             System.out.println("Please, type in the number from 1 to 3");
             System.out.print("Difficulty: ");
